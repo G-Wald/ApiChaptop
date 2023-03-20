@@ -1,21 +1,23 @@
 package com.openclassroom.ApiChatop.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.sql.Date;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import lombok.Getter;
 
 @Data
 @Table(name = "users")
+@Getter
+@AllArgsConstructor
 public class users {
-
+	@Id
 	private String id;
 	private String email; 	
 	private String name; 	
-	private String password;	
+	private String password;
+	@Column(name="Date")
 	private Date created_at; 	
 	private Date updated_at; 	
 }

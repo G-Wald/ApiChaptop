@@ -1,7 +1,6 @@
 package com.openclassroom.ApiChatop.service;
 
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +12,23 @@ import lombok.Data;
 
 @Data
 @Service
-public class usersService {
-
+public class usersService implements IUsersService {
 
     @Autowired
     private usersRepository usersRepository;
 
-    public Optional<users> getuser(final String id) {
+    public Optional<users> getUser(final String id) {
+
         return usersRepository.findById(id);
     }
 
-    public Iterable<users> getusers() {
+    public Iterable<users> getUsers() {
+
         return usersRepository.findAll();
     }
 
     public void deleteUser(final String id) {
+
         usersRepository.deleteById(id);
     }
 
