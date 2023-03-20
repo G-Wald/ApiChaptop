@@ -1,10 +1,14 @@
 package com.openclassroom.ApiChatop.controller;
 
 import com.openclassroom.ApiChatop.model.Rentals;
+import com.openclassroom.ApiChatop.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 
 @RestController
@@ -14,10 +18,15 @@ public class RentalsController {
     private com.openclassroom.ApiChatop.service.RentalsService RentalsService;
     /**
      * Read - Get all rentals
-     * @return - An Iterable object of Employee full filled
+     * @return - An Iterable object of Employee fulfilled
      */
-    @GetMapping("/{id}")
+   /* @GetMapping("")
     public Iterable<Rentals> getRentals() {
         return RentalsService.getRentals();
+    }*/
+
+    @GetMapping("/{id}")
+    public Optional<Rentals> getRental(@PathVariable String id) {
+        return RentalsService.getRental(id);
     }
 }

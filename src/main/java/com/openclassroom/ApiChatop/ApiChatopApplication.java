@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.openclassroom.ApiChatop.repository")
-@ComponentScan(basePackages = { "com.openclassroom.ApiChatop.service" })
+@ComponentScan(basePackages = { "com.openclassroom.ApiChatop.service"})
 @EntityScan("com.openclassroom.ApiChatop.model")
 public class ApiChatopApplication {
 

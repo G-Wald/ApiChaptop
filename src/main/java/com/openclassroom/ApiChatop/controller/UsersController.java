@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openclassroom.ApiChatop.model.Users;
 import com.openclassroom.ApiChatop.service.UsersService;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -18,8 +20,13 @@ public class UsersController {
     * Read - Get all employees
     * @return - An Iterable object of Employee full filled
     */
-    @GetMapping("/{id}")
     public Iterable<Users> getUsers() {
+
         return UsersService.getUsers();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Users> getUser(String id) {
+        return UsersService.getUser(id);
     }
 }

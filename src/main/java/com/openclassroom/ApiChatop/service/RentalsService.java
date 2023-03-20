@@ -16,11 +16,13 @@ public class RentalsService implements IRentalsService {
 
     @Transactional
     public Optional<Rentals> getRental(final String id) {
+        System.out.println("salut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
         return RentalsRepository.findById(id);
     }
 
-    @Transactional
     public Iterable<Rentals> getRentals() {
+        System.out.println("salut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return RentalsRepository.findAll();
     }
 

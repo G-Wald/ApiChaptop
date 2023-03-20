@@ -15,7 +15,7 @@ public class MessagesController {
     private com.openclassroom.ApiChatop.service.MessagesService MessagesService;
     /**
      * Read - Get all rentals
-     * @return - An Iterable object of Employee full filled
+     * @return - An Iterable object of Employee fulfilled
      */
     @GetMapping("/{id}")
     public Iterable<Messages> getMessages() {

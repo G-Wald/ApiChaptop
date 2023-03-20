@@ -19,7 +19,7 @@ public class Rentals {
 	private int surface;
 	private int price;
 	private String picture;
-	private String descritpion;
+	private String description;
 	private String owner_id;
 	private Date created_at; 	
 	private Date updated_at; 

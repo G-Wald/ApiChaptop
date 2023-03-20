@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "Users")
+@Table(name = "users")
 @AllArgsConstructor
 public class Users {
 	@Id
@@ -15,7 +15,6 @@ public class Users {
 	private String email; 	
 	private String name; 	
 	private String password;
-	@Column(name="Date")
-	private Date created_at; 	
+	private Date created_at;
 	private Date updated_at; 	
 }
