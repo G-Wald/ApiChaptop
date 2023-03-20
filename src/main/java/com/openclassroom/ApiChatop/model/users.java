@@ -6,7 +6,9 @@ import lombok.Data;
 import java.sql.Date;
 
 import lombok.Getter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+@EntityScan
 @Data
 @Table(name = "users")
 @Getter
