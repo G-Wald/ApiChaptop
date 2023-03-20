@@ -8,10 +8,9 @@ import java.sql.Date;
 import lombok.Getter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan
+@Entity
 @Data
 @Table(name = "users")
-@Getter
 @AllArgsConstructor
 public class users {
 	@Id
