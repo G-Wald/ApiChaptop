@@ -10,14 +10,17 @@ import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "messages")
+@Table(name = "rentals")
 @AllArgsConstructor
-public class messages {
+public class Rentals {
 	@Id
- 	private String id;
-	private String rental_id; 	
-	private String user_id; 	
-	private String message;	
+	private String id;
+	private String name; 
+	private int surface;
+	private int price;
+	private String picture;
+	private String descritpion;
+	private String owner_id;
 	private Date created_at; 	
 	private Date updated_at; 
 }

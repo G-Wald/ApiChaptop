@@ -5,14 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.sql.Date;
 
-import lombok.Getter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 @Entity
 @Data
-@Table(name = "users")
+@Table(name = "Users")
 @AllArgsConstructor
-public class users {
+public class Users {
 	@Id
 	private String id;
 	private String email; 	

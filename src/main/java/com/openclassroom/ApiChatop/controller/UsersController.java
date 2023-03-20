@@ -6,23 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassroom.ApiChatop.model.users;
-import com.openclassroom.ApiChatop.service.usersService;
+import com.openclassroom.ApiChatop.model.Users;
+import com.openclassroom.ApiChatop.service.UsersService;
 
 @RestController
 @RequestMapping("/users")
-public class usersController {
-	
+public class UsersController {
     @Autowired
-    private usersService usersService;
-
+    private UsersService UsersService;
     /**
     * Read - Get all employees
     * @return - An Iterable object of Employee full filled
     */
     @GetMapping("/{id}")
-    public Iterable<users> getUsers() {
-        return usersService.getUsers();
+    public Iterable<Users> getUsers() {
+        return UsersService.getUsers();
     }
-
 }

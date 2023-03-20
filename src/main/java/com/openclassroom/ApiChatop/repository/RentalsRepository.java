@@ -1,13 +1,11 @@
 package com.openclassroom.ApiChatop.repository;
 
+import com.openclassroom.ApiChatop.model.Rentals;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.openclassroom.ApiChatop.model.users;
-
-@Qualifier("users")
+@Qualifier("Rentals")
 @Repository
-public interface usersRepository extends CrudRepository<users,String> {
-
+public interface RentalsRepository extends CrudRepository<Rentals,String> {
 }

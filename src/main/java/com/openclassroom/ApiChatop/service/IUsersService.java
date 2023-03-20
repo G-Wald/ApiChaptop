@@ -1,9 +1,9 @@
 package com.openclassroom.ApiChatop.service;
 
-import com.openclassroom.ApiChatop.model.users;
+import com.openclassroom.ApiChatop.model.Users;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface IUsersService {
-    public Iterable<users> getUsers();
+    public Iterable<Users> getUsers();
 }
