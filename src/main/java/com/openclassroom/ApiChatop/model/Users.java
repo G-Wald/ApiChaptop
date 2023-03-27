@@ -16,5 +16,7 @@ public class Users {
 	private String name; 	
 	private String password;
 	private Date created_at;
-	private Date updated_at; 	
+	private Date updated_at;
+
+	public Users(){};
 }

@@ -19,5 +19,7 @@ public class Messages {
 	private String user_id; 	
 	private String message;	
 	private Date created_at; 	
-	private Date updated_at; 
+	private Date updated_at;
+
+	public Messages(){};
 }

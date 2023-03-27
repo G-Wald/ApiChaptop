@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 
-@Service("RentalsService")
+@Service()
 public class RentalsService implements IRentalsService {
 
     @Autowired
@@ -16,13 +16,10 @@ public class RentalsService implements IRentalsService {
 
     @Transactional
     public Optional<Rentals> getRental(final String id) {
-        System.out.println("salut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
         return RentalsRepository.findById(id);
     }
 
     public Iterable<Rentals> getRentals() {
-        System.out.println("salut!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         return RentalsRepository.findAll();
     }
 
@@ -32,8 +29,8 @@ public class RentalsService implements IRentalsService {
     }
 
     @Transactional
-    public Rentals saveRental(Rentals rentals) {
-        Rentals savedRental = RentalsRepository.save(rentals);
+    public Rentals saveRental(Rentals rental) {
+        Rentals savedRental = RentalsRepository.save(rental);
         return savedRental;
     }
 

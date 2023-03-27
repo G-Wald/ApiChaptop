@@ -1,12 +1,11 @@
 package com.openclassroom.ApiChatop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,7 +13,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class Rentals {
 	@Id
-	private String id;
+	private int id;
 	private String name; 
 	private int surface;
 	private int price;
@@ -22,5 +21,7 @@ public class Rentals {
 	private String description;
 	private String owner_id;
 	private Date created_at; 	
-	private Date updated_at; 
+	private Date updated_at;
+
+	public Rentals(){};
 }

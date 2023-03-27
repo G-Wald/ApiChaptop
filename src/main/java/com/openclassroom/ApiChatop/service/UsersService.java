@@ -1,13 +1,12 @@
 package com.openclassroom.ApiChatop.service;
 
-
-import java.util.Optional;
-
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.openclassroom.ApiChatop.model.Users;
 import com.openclassroom.ApiChatop.repository.UsersRepository;
+
+import java.util.Optional;
 
 
 @Service("UsersService")

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/rentals")
+@RequestMapping("/messages")
 public class MessagesController {
     @Autowired
     private com.openclassroom.ApiChatop.service.MessagesService MessagesService;
