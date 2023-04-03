@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface MessagesRepository extends CrudRepository<Messages,String> {
     Optional<Messages> findById(String id);
+    Messages save(Messages messages);
 }

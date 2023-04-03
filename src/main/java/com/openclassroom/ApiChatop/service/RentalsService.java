@@ -24,14 +24,19 @@ public class RentalsService implements IRentalsService {
     }
 
     @Transactional
-    public void deleteRental(final String id) {
-        RentalsRepository.deleteById(id);
-    }
-
-    @Transactional
     public Rentals saveRental(Rentals rental) {
         Rentals savedRental = RentalsRepository.save(rental);
         return savedRental;
     }
 
+    @Transactional
+    public Rentals updateRental(Rentals rental) {
+        Rentals newRental = RentalsRepository.save(rental);
+        return newRental;
+    }
+
+    @Transactional
+    public void deleteRental(final String id) {
+        RentalsRepository.deleteById(id);
+    }
 }

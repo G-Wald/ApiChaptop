@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
@@ -14,7 +14,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class Messages {
 	@Id
- 	private String id;
+ 	private int id;
 	private String rental_id; 	
 	private String user_id; 	
 	private String message;	

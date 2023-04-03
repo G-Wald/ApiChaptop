@@ -42,14 +42,14 @@ class ApiChatopApplicationTests {
 
 	@Mock
 	RentalsService rentalsService;
-
+	/*
 	@BeforeEach
 	void initData() {
 		rentals = new Rentals("1", "toto", 150, 2000000, "picture", "une belle maison", "1", new Date(28021999), new Date(28051999));
 		Mockito.when(rentalsService.saveRental(any(Rentals.class))).thenReturn(rentals);
 	}
 
-	/*@Test
+	@Test
 	//@WithMockUser(username="testTEST",password="test!31", roles= "USER")
 	void testGetRental() throws Exception {
 		Mockito.when(rentalsRepository.findById("1")).thenReturn(Optional.ofNullable(rentals));

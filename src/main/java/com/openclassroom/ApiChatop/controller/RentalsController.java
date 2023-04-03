@@ -4,13 +4,14 @@ import com.openclassroom.ApiChatop.model.Rentals;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Optional;
+
+import static java.lang.Integer.parseInt;
 
 
 @RestController
@@ -50,15 +51,24 @@ public class RentalsController {
         rental.setPrice(price);
         rental.setDescription(description);
         rental.setOwner_id(id);
-        Date date = convertToDateViaInstant(LocalDate.now());
-        rental.setCreated_at(date);
-        rental.setUpdated_at(date);
         rental.setPicture("testpictureurl");
         return RentalsService.saveRental(rental);
     }
 
-    public Date convertToDateViaInstant(LocalDate dateToConvert) {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        return Date.from(dateToConvert.atStartOfDay(defaultZoneId).toInstant());
+    @PutMapping(value = "/{id}")
+    public Rentals updateRental(@PathVariable String id,
+                                @RequestParam("name") String name,
+                                @RequestParam("surface") int surface,
+                                @RequestParam("price") int price,
+                                @RequestParam("description") String description
+    ){
+        Optional<Rentals> rental = RentalsService.getRental(id);
+        rental.get().setName(name);
+        rental.get().setSurface(surface);
+        rental.get().setPrice(price);
+        rental.get().setDescription(description);
+        DateConverter converter = new DateConverter();
+        rental.get().setUpdated_at(converter.convertToDateViaInstant(LocalDate.now()));
+        return RentalsService.updateRental(rental.get());
     }
 }

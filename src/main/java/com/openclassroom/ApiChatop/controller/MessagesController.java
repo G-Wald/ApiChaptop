@@ -1,12 +1,11 @@
 package com.openclassroom.ApiChatop.controller;
 
 import com.openclassroom.ApiChatop.model.Messages;
-import com.openclassroom.ApiChatop.model.Rentals;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/messages")
@@ -14,11 +13,15 @@ public class MessagesController {
     @Autowired
     private com.openclassroom.ApiChatop.service.MessagesService MessagesService;
     /**
-     * Read - Get all rentals
-     * @return - An Iterable object of Employee fulfilled
+     * Read - Post a Message
+     * @return - An Message
      */
-    @GetMapping("/{id}")
-    public Iterable<Messages> getMessages() {
-        return MessagesService.getMessages();
+    @PostMapping("")
+    public Messages createMessages(@RequestBody Messages messageSend) {
+        Messages message = new Messages();
+        message.setUser_id(messageSend.getUser_id());
+        message.setRental_id(messageSend.getRental_id());
+        message.setMessage(messageSend.getMessage());
+        return MessagesService.saveMessage(message);
     }
 }

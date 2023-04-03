@@ -12,7 +12,7 @@ import com.openclassroom.ApiChatop.service.UsersService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/auth")
 public class UsersController {
     @Autowired
     private UsersService UsersService;
@@ -23,6 +23,11 @@ public class UsersController {
     public Iterable<Users> getUsers() {
 
         return UsersService.getUsers();
+    }
+
+    @GetMapping
+    public Users retrievePrincipal(Users user) {
+        return user;
     }
 
     @GetMapping("/{id}")

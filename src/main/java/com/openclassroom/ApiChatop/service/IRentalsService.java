@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface IRentalsService {
     public Iterable<Rentals> getRentals();
     public Rentals saveRental(Rentals rental);
+    public Rentals updateRental(Rentals rental);
 }
