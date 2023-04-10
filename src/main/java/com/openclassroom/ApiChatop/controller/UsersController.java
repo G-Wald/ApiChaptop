@@ -1,10 +1,9 @@
 package com.openclassroom.ApiChatop.controller;
 
 
+import com.openclassroom.ApiChatop.model.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.openclassroom.ApiChatop.model.Users;
 import com.openclassroom.ApiChatop.service.UsersService;
@@ -29,6 +28,11 @@ public class UsersController {
     public Users retrievePrincipal(Users user) {
         return user;
     }
+
+    /*@PostMapping("login")
+    public Users Login(@RequestBody Users userLog){
+
+    }*/
 
     @GetMapping("/{id}")
     public Optional<Users> getUser(String id) {

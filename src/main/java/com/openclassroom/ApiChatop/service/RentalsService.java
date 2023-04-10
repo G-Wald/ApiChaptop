@@ -39,4 +39,7 @@ public class RentalsService implements IRentalsService {
     public void deleteRental(final String id) {
         RentalsRepository.deleteById(id);
     }
+
+
+
 }

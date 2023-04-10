@@ -2,6 +2,7 @@ package com.openclassroom.ApiChatop.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.openclassroom.ApiChatop.model.Users;
 import com.openclassroom.ApiChatop.repository.UsersRepository;
@@ -9,9 +10,8 @@ import com.openclassroom.ApiChatop.repository.UsersRepository;
 import java.util.Optional;
 
 
-@Service("UsersService")
+@Service()
 public class UsersService implements IUsersService {
-
     @Autowired
     private UsersRepository UsersRepository;
 
@@ -36,4 +36,9 @@ public class UsersService implements IUsersService {
         return savedEmployee;
     }
 
+    @Transactional
+    public Optional<Users> findByName(String name){
+        Optional<Users> user = UsersRepository.findByName(name);
+        return user;
+    }
 }
