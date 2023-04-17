@@ -1,7 +1,10 @@
 package com.openclassroom.ApiChatop.service;
 
+import com.openclassroom.ApiChatop.provider.CustomAuthentificationProvider;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.openclassroom.ApiChatop.model.Users;
@@ -31,9 +34,20 @@ public class UsersService implements IUsersService {
     }
 
     @Transactional
+    public Optional<Users> GetUserByEmail(final String email) {
+        return UsersRepository.findByEmail(email);
+    }
+
+    //@Transactional
+    //public String login(Users user){
+
+      //  Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
+        //return customAuthentificationprovider.authenticate(auth).getDetails().toString();
+    //}
+
+    @Transactional
     public Users saveUser(Users users) {
-        Users savedEmployee = UsersRepository.save(users);
-        return savedEmployee;
+        return UsersRepository.save(users);
     }
 
     @Transactional

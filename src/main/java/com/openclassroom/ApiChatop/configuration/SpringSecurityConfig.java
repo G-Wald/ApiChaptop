@@ -1,51 +1,62 @@
 package com.openclassroom.ApiChatop.configuration;
 
+import com.openclassroom.ApiChatop.Utils.AuthEntryPointJwt;
+import com.openclassroom.ApiChatop.Utils.AuthTokenFilter;
 import com.openclassroom.ApiChatop.provider.CustomAuthentificationProvider;
+import jakarta.servlet.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
 
+
+    public Filter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    @Autowired
+    CustomAuthentificationProvider customAuthentificationProvider;
+    @Autowired
+    private DataSource dataSource;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http
+                .csrf().disable()
+                //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
-                )
-                .httpBasic();
+                );
+                //.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                //.httpBasic();
+        //http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
     @Autowired
-    private CustomAuthentificationProvider customAuthentificationprovider;
-    @Autowired
-    private DataSource dataSource;
-
-   /* @Bean
-    public UserDetailsManager users(DataSource dataSource) {
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-        jdbcUserDetailsManager.setDataSource(dataSource);
-        return jdbcUserDetailsManager;
-    }*/
-
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
-        //auth.jdbcAuthentication()
-        auth.authenticationProvider(customAuthentificationprovider);
-                //.dataSource(dataSource)
+        auth.authenticationProvider(customAuthentificationProvider);
             //.passwordEncoder(passwordEncoder());
-               //.authoritiesByUsernameQuery("select email,'admin', true from users where email = ?");
     }
 }
 

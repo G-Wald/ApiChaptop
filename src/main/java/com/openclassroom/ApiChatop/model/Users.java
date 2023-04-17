@@ -1,16 +1,12 @@
 package com.openclassroom.ApiChatop.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
