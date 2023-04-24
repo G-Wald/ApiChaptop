@@ -13,9 +13,6 @@ public class JwtUtils {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    //@Value("${bezkoder.app.jwtSecret}")
-    //private String jwtSecret;
-
     String jwtSecret = "random_secret_key";
 
     public String generateJwtToken(Authentication authentication) {
@@ -28,7 +25,7 @@ public class JwtUtils {
                 .compact();
     }
 
-    public String getUserNameFromJwtToken(String token) {
+    public String getEmailFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 

@@ -3,6 +3,7 @@ package com.openclassroom.ApiChatop;
 import com.openclassroom.ApiChatop.controller.RentalsController;
 import com.openclassroom.ApiChatop.model.Rentals;
 import com.openclassroom.ApiChatop.repository.RentalsRepository;
+import com.openclassroom.ApiChatop.service.FileSystemStorageService;
 import com.openclassroom.ApiChatop.service.RentalsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +15,17 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Optional;
 
@@ -42,6 +51,34 @@ class ApiChatopApplicationTests {
 
 	@Mock
 	RentalsService rentalsService;
+
+	@Test
+	void TestSaveFile(){
+
+		String name = "galaxie.png";
+		Path path = Paths.get("");
+		String s = path.toAbsolutePath().toString();
+		path = Paths.get(s+"/src/test/java/com/openclassroom/ApiChatop/resources/"+name);
+		System.out.println("path");
+		System.out.println(path);
+		String originalFileName = "galaxie.png";
+		String contentType = "png";
+		byte[] content = null;
+		try {
+			content = Files.readAllBytes(path);
+		} catch (final IOException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		MultipartFile result = new MockMultipartFile(name,
+				originalFileName, contentType, content);
+		Rentals rental = new Rentals();
+		rental.setId(1);
+		FileSystemStorageService fileSystemStorageService1 = new FileSystemStorageService();
+
+		fileSystemStorageService1.store(rental,result);
+	}
+
 	/*
 	@BeforeEach
 	void initData() {
@@ -65,6 +102,10 @@ class ApiChatopApplicationTests {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath(".name", is("villa")));
 	}
+
+
+
+
 	@Test
 	//@WithMockUser(username="testTEST",password="test!31", roles= "USER")
 	void testGetRentals() throws Exception{

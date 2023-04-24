@@ -1,17 +1,15 @@
 package com.openclassroom.ApiChatop.controller;
 
 import com.openclassroom.ApiChatop.model.Rentals;
+import com.openclassroom.ApiChatop.service.FileSystemStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.Optional;
-
-import static java.lang.Integer.parseInt;
 
 
 @RestController
@@ -20,6 +18,9 @@ public class RentalsController {
     Logger logger = LoggerFactory.getLogger(RentalsController.class);
     @Autowired
     private com.openclassroom.ApiChatop.service.RentalsService RentalsService;
+
+    @Autowired
+    private FileSystemStorageService fileSystemStorageService;
     /**
      * Read - Get all rentals
      * @return - An Iterable object of Employee fulfilled
@@ -45,15 +46,17 @@ public class RentalsController {
                                 @RequestParam("picture") MultipartFile picture,
                                 @RequestParam("description") String description
                                 ){
+
         Rentals rental = new Rentals();
         rental.setName(name);
         rental.setSurface(surface);
         rental.setPrice(price);
         rental.setDescription(description);
         rental.setOwner_id(id);
-        rental.setPicture("testpictureurl");
+        rental.setPicture(fileSystemStorageService.store(rental, picture));
         return RentalsService.saveRental(rental);
     }
+
 
     @PutMapping(value = "/{id}")
     public Rentals updateRental(@PathVariable String id,

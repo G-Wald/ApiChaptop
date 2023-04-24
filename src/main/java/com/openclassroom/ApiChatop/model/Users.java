@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,35 +22,6 @@ public class Users {
 	private String password;
 	private Date created_at;
 	private Date updated_at;
-
 	public Users(){};
-
-	/*
-	implements UserDetails
-	authorities.add(new SimpleGrantedAuthority("USER"));
-	public String getUsername(){
-		return this.name;
-	}
-	public String getPassword(){
-		return this.password;
-	}
-	public boolean isAccountNonExpired(){
-		return true;
-	}
-	public boolean isAccountNonLocked(){
-		return true;
-	}
-
-	public boolean isCredentialsNonExpired(){
-		return true;
-	};
-
-	public boolean isEnabled(){
-		return true;
-	};
-	private final Set<GrantedAuthority> authorities = new HashSet<>();
-
-	public Collection<GrantedAuthority> getAuthorities() {
-		return authorities;
-	}*/
 }
+

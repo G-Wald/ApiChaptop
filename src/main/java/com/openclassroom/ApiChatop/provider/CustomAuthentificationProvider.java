@@ -9,7 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,12 +16,8 @@ import java.util.ArrayList;
 @Component
 public class CustomAuthentificationProvider implements AuthenticationProvider {
 
-
     @Autowired
     private UsersService usersService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException{
@@ -43,5 +38,4 @@ public class CustomAuthentificationProvider implements AuthenticationProvider {
     public boolean supports(Class<?>authentication){
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
-
 }

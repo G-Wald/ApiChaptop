@@ -41,7 +41,7 @@ public class UsersService implements IUsersService {
     //@Transactional
     //public String login(Users user){
 
-      //  Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
+        //Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword());
         //return customAuthentificationprovider.authenticate(auth).getDetails().toString();
     //}
 

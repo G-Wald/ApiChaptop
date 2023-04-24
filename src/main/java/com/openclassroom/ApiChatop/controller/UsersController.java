@@ -1,12 +1,15 @@
 package com.openclassroom.ApiChatop.controller;
 
 
+import com.openclassroom.ApiChatop.Utils.AuthTokenFilter;
 import com.openclassroom.ApiChatop.Utils.JwtUtils;
 import com.openclassroom.ApiChatop.model.JwtResponse;
 import com.openclassroom.ApiChatop.model.LoginRequest;
+import com.openclassroom.ApiChatop.model.Rentals;
 import com.openclassroom.ApiChatop.model.Users;
 import com.openclassroom.ApiChatop.provider.CustomAuthentificationProvider;
 import com.openclassroom.ApiChatop.service.UsersService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth")
 public class UsersController {
     @Autowired
     private UsersService UsersService;
@@ -29,30 +31,36 @@ public class UsersController {
    @Autowired
    JwtUtils jwtUtils;
 
-    public Iterable<Users> getUsers() {
-
-        return UsersService.getUsers();
-    }
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping
     public Users retrievePrincipal(Users user) {
         return user;
     }
 
-    @PostMapping("login")
+    @PostMapping("/auth/login")
     public ResponseEntity<?> Login(@RequestBody LoginRequest userLog){
-
         Authentication auth = customAuthentificationprovider.authenticate(new UsernamePasswordAuthenticationToken(userLog.getLogin(),userLog.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(auth);
         String jwt = jwtUtils.generateJwtToken(auth);
-
       return ResponseEntity.ok(new JwtResponse(jwt, auth.getPrincipal().toString(),auth.getCredentials().toString()));
-
     }
 
-    @GetMapping("/me")
-    public Optional<Users> getUser(String id) {
+    @GetMapping("/auth/me")
+    public ResponseEntity<Users> getUser() {
+        /*AuthTokenFilter authTokenFilter = new AuthTokenFilter();
+        String jwt = authTokenFilter.parseJwt(request);
+        var email = jwtUtils.getEmailFromJwtToken(jwt);
+        var user = UsersService.GetUserByEmail(email);
+        return ResponseEntity.ok(user.get());*/
+        //Est il possible d'avoir le token avec un get ? Le mockoon ne retourne rien
+        var user = new Users();
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/user/{id}")
+    public Optional<Users> getUserById(@PathVariable String id) {
         return UsersService.getUser(id);
     }
 }
