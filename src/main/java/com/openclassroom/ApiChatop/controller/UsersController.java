@@ -31,14 +31,6 @@ public class UsersController {
    @Autowired
    JwtUtils jwtUtils;
 
-    @Autowired
-    private HttpServletRequest request;
-
-    @GetMapping
-    public Users retrievePrincipal(Users user) {
-        return user;
-    }
-
     @PostMapping("/auth/login")
     public ResponseEntity<?> Login(@RequestBody LoginRequest userLog){
         Authentication auth = customAuthentificationprovider.authenticate(new UsernamePasswordAuthenticationToken(userLog.getLogin(),userLog.getPassword()));

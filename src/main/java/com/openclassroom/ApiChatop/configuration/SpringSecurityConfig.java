@@ -3,6 +3,7 @@ package com.openclassroom.ApiChatop.configuration;
 import com.openclassroom.ApiChatop.Utils.AuthEntryPointJwt;
 import com.openclassroom.ApiChatop.Utils.AuthTokenFilter;
 import com.openclassroom.ApiChatop.provider.CustomAuthentificationProvider;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,22 +35,25 @@ public class SpringSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
+    @Resource
     CustomAuthentificationProvider customAuthentificationProvider;
     @Autowired
     private DataSource dataSource;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)throws Exception{
         http
                 .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                //.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 );
+                http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
                 http.authenticationProvider(customAuthentificationProvider);
                 http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
