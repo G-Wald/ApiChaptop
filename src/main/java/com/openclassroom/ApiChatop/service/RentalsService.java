@@ -1,42 +1,44 @@
 package com.openclassroom.ApiChatop.service;
 
 import com.openclassroom.ApiChatop.model.Rentals;
+import com.openclassroom.ApiChatop.repository.RentalsRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 
-@Service()
+@Service
+@RequiredArgsConstructor
 public class RentalsService implements IRentalsService {
 
-    @Autowired
-    private com.openclassroom.ApiChatop.repository.RentalsRepository RentalsRepository;
+    private final RentalsRepository rentalsRepository;
 
     @Transactional
     public Optional<Rentals> getRental(final String id) {
-        return RentalsRepository.findById(id);
+        return rentalsRepository.findById(id);
     }
 
     public Iterable<Rentals> getRentals() {
-        return RentalsRepository.findAll();
+        return rentalsRepository.findAll();
     }
 
     @Transactional
     public Rentals saveRental(Rentals rental) {
-        Rentals savedRental = RentalsRepository.save(rental);
+        Rentals savedRental = rentalsRepository.save(rental);
         return savedRental;
     }
 
     @Transactional
     public Rentals updateRental(Rentals rental) {
-        Rentals newRental = RentalsRepository.save(rental);
+        Rentals newRental = rentalsRepository.save(rental);
         return newRental;
     }
 
     @Transactional
     public void deleteRental(final String id) {
-        RentalsRepository.deleteById(id);
+        rentalsRepository.deleteById(id);
     }
 }

@@ -2,6 +2,8 @@ package com.openclassroom.ApiChatop.controller;
 
 import com.openclassroom.ApiChatop.model.Rentals;
 import com.openclassroom.ApiChatop.service.FileSystemStorageService;
+import com.openclassroom.ApiChatop.service.RentalsService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,11 @@ import java.util.Optional;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/rentals")
 public class RentalsController {
     Logger logger = LoggerFactory.getLogger(RentalsController.class);
-    @Autowired
-    private com.openclassroom.ApiChatop.service.RentalsService RentalsService;
+    private final RentalsService rentalsService;
 
     @Autowired
     private FileSystemStorageService fileSystemStorageService;
@@ -26,16 +28,16 @@ public class RentalsController {
      * @return - An Iterable object of Employee fulfilled
      */
 
-
-   @GetMapping("")
+   @GetMapping
     public Iterable<Rentals> getRentals() {
        logger.debug("call of getRentals method");
-        return RentalsService.getRentals();
+        return rentalsService.getRentals();
     }
 
     @GetMapping("/{id}")
     public Optional<Rentals> getRental(@PathVariable String id) {
-        return RentalsService.getRental(id);
+        logger.debug("call of getRental method");
+       return rentalsService.getRental(id);
     }
 
     @PostMapping("/{id}")
@@ -54,24 +56,24 @@ public class RentalsController {
         rental.setDescription(description);
         rental.setOwner_id(id);
         rental.setPicture(fileSystemStorageService.store(rental, picture));
-        return RentalsService.saveRental(rental);
+        return rentalsService.saveRental(rental);
     }
 
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public Rentals updateRental(@PathVariable String id,
                                 @RequestParam("name") String name,
                                 @RequestParam("surface") int surface,
                                 @RequestParam("price") int price,
                                 @RequestParam("description") String description
     ){
-        Optional<Rentals> rental = RentalsService.getRental(id);
+        Optional<Rentals> rental = rentalsService.getRental(id);
         rental.get().setName(name);
         rental.get().setSurface(surface);
         rental.get().setPrice(price);
         rental.get().setDescription(description);
         DateConverter converter = new DateConverter();
         rental.get().setUpdated_at(converter.convertToDateViaInstant(LocalDate.now()));
-        return RentalsService.updateRental(rental.get());
+        return rentalsService.updateRental(rental.get());
     }
 }
