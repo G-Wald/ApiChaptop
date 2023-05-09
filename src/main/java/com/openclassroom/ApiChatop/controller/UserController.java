@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-import static org.hibernate.internal.util.collections.ArrayHelper.forEach;
-
 @RestController
 @RequiredArgsConstructor
 public class UserController {

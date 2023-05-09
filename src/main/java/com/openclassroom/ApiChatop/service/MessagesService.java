@@ -1,7 +1,6 @@
 package com.openclassroom.ApiChatop.service;
 
 import com.openclassroom.ApiChatop.model.Messages;
-import com.openclassroom.ApiChatop.model.Rentals;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
