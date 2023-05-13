@@ -4,7 +4,6 @@ import com.openclassroom.ApiChatop.model.Rentals;
 import com.openclassroom.ApiChatop.repository.RentalsRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,11 +15,13 @@ public class RentalsService implements IRentalsService {
 
     private final RentalsRepository rentalsRepository;
 
+    //Get rental by his id
     @Transactional
     public Optional<Rentals> getRental(final String id) {
         return rentalsRepository.findById(id);
     }
 
+    //Get all rentals
     public Iterable<Rentals> getRentals() {
         return rentalsRepository.findAll();
     }
@@ -35,10 +36,5 @@ public class RentalsService implements IRentalsService {
     public Rentals updateRental(Rentals rental) {
         Rentals newRental = rentalsRepository.save(rental);
         return newRental;
-    }
-
-    @Transactional
-    public void deleteRental(final String id) {
-        rentalsRepository.deleteById(id);
     }
 }

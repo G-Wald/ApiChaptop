@@ -15,6 +15,11 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
+/*
+Model that implement UserDetail to be use by spring security
+ */
+
+
 @Data
 @Builder
 @NoArgsConstructor

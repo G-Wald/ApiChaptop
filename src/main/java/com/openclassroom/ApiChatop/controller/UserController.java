@@ -23,7 +23,11 @@ public class UserController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ){
-        return ResponseEntity.ok(service.register(request));
+        var authenticationResponse = service.register(request);
+        if(authenticationResponse == null){
+            return null;
+        }
+        return ResponseEntity.ok(authenticationResponse);
     }
 
     @PostMapping("/auth/login")
@@ -38,5 +42,10 @@ public class UserController {
     public ResponseEntity<UserDetailResponse> GetMeFromToken(
             @RequestHeader Map<String, String> headers) {
             return ResponseEntity.ok(service.getUserFromHeaders(headers));
+    }
+
+    @GetMapping("/user/{id}")
+    public UserDetailResponse getUser(@PathVariable String id) {
+        return service.getUserById(id);
     }
 }

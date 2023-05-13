@@ -33,7 +33,7 @@ Click on new Database use utf8mb4_general_ci type and a name it chatop.
 
 Once created use the SQL file to increment the database.
 
-You can found it on this project:
+You can find it on this project:
 
 ```
 ApiChatop/database/script.sql

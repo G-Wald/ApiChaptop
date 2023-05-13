@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+/*
+ * Convert the date to the local zone
+ *
+ * */
 public class DateConverter {
 
     public Date convertToDateViaInstant(LocalDate dateToConvert) {

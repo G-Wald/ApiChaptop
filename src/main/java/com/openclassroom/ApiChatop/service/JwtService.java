@@ -14,6 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+/*
+* Service Jwt
+* Generate and check if token is compliant
+* */
+
+
 @Service
 public class JwtService {
 
@@ -33,6 +39,7 @@ public class JwtService {
         return generateToken(new HashMap<>(),userDetails);
     }
 
+    //Generate a token available 24 hours
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails){

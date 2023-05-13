@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.*;
 public class MessagesController {
     @Autowired
     private com.openclassroom.ApiChatop.service.MessagesService MessagesService;
-    /**
-     * Read - Post a Message
-     * @return - An Message
-     */
+
     @PostMapping("")
-    public Messages createMessages(@RequestBody Messages messageSend) {
+    public String createMessages(@RequestBody Messages messageSend) {
         Messages message = new Messages();
         message.setUser_id(messageSend.getUser_id());
         message.setRental_id(messageSend.getRental_id());
         message.setMessage(messageSend.getMessage());
-        return MessagesService.saveMessage(message);
+        var savedMessage = MessagesService.saveMessage(message);
+
+        if(savedMessage == null){
+            return null;
+        }
+        return "Message send with success";
     }
 }

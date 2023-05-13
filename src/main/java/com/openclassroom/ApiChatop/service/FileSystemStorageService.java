@@ -15,7 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
-
+/**
+* Control file saving
+*
+* */
 @Service
 public class FileSystemStorageService implements IFileSystemStorageService {
     private final Path rootLocation;
@@ -31,6 +34,7 @@ public class FileSystemStorageService implements IFileSystemStorageService {
         } catch (IOException e) {}
     }
 
+    //Save a file with a specific name in a repository
     @Override
     public String store(Rentals rentals,MultipartFile file) {
 
@@ -56,7 +60,6 @@ public class FileSystemStorageService implements IFileSystemStorageService {
         try {
             return Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).map(this.rootLocation::relativize);
         } catch (IOException e) {	return null; }
-
     }
 
     @Override
@@ -68,5 +71,4 @@ public class FileSystemStorageService implements IFileSystemStorageService {
     public void deleteAll() {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
-
 }

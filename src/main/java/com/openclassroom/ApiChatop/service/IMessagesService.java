@@ -5,6 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface IMessagesService {
-    public Iterable<Messages> getMessages();
     public Messages saveMessage(Messages messages);
 }

@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+ * Model for the request /me
+ * This model will be return if the user has a correct token
+ * */
 @Data
 @Builder
 @AllArgsConstructor

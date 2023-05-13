@@ -5,6 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+ * Model for the response of the authentication
+ *
+ * */
+
 @Data
 @Builder
 @AllArgsConstructor

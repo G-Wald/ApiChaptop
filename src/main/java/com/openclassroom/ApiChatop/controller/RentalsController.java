@@ -22,25 +22,19 @@ public class RentalsController {
 
     @Autowired
     private FileSystemStorageService fileSystemStorageService;
-    /**
-     * Read - Get all rentals
-     * @return - An Iterable object of Employee fulfilled
-     */
 
    @GetMapping
     public Iterable<Rentals> getRentals() {
-       logger.debug("call of getRentals method");
         return rentalsService.getRentals();
     }
 
     @GetMapping("/{id}")
     public Optional<Rentals> getRental(@PathVariable String id) {
-        logger.debug("call of getRental method");
        return rentalsService.getRental(id);
     }
 
     @PostMapping("/{id}")
-    public Rentals createRental(@PathVariable String id,
+    public String createRental(@PathVariable String id,
                                 @RequestParam("name") String name,
                                 @RequestParam("surface") int surface,
                                 @RequestParam("price") int price,
@@ -55,12 +49,15 @@ public class RentalsController {
         rental.setDescription(description);
         rental.setOwner_id(id);
         rental.setPicture(fileSystemStorageService.store(rental, picture));
-        return rentalsService.saveRental(rental);
+        if( rentalsService.saveRental(rental) == null){
+            return null;
+        }
+        return "Rental created !";
     }
 
 
     @PutMapping("/{id}")
-    public Rentals updateRental(@PathVariable String id,
+    public String updateRental(@PathVariable String id,
                                 @RequestParam("name") String name,
                                 @RequestParam("surface") int surface,
                                 @RequestParam("price") int price,
@@ -73,6 +70,9 @@ public class RentalsController {
         rental.get().setDescription(description);
         DateConverter converter = new DateConverter();
         rental.get().setUpdated_at(converter.convertToDateViaInstant(LocalDate.now()));
-        return rentalsService.updateRental(rental.get());
+        if( rentalsService.updateRental(rental.get()) == null){
+            return null;
+        }
+        return "Rental updated !";
     }
 }
