@@ -48,12 +48,12 @@ public class UserService implements IUserService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
+                        request.getLogin(),
                         request.getPassword()
                 )
         );
 
-        var user = repository.findByEmail(request.getEmail())
+        var user = repository.findByEmail(request.getLogin())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
 
